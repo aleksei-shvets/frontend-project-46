@@ -9,6 +9,9 @@
   },
   "author": "Aleksei Shvets",
   "license": "ISC",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "dependencies": {
     "commander": "^11.0.0"
   },
