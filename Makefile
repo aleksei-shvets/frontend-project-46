@@ -1,13 +1,25 @@
 install:
-		npm ci
+	npm ci
 
 publish:
-		npm publish --dry-run
+	npm publish --dry-run
 
 lint:
-		npx eslint
+	npx eslint .
+
+gendiff -h:
+	node bin/gendiff.js -h
+
+gendiff --help:
+	node bin/gendiff.js -h
+
+gendiff -V:
+	node bin/gendiff.js -V
+
+gendiff --version:
+	node bin/gendiff.js -V
 
 gendiff:
-		node bin/gendiff.js
+	node bin/gendiff.js
 
 .PHONY: gendiff
