@@ -1,42 +1,12 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-// eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
 import _ from 'lodash';
-
-//import path from 'path';
-
-/* const program = new Command();
-
-program
-  .description('Compares two configuration files and shows a difference.')
-  .version('1.0.0')
-  .helpOption('-h, --help', 'output usage information')
-  .option('-f, --format <type>', 'output format')
-  .argument('<filepath1>')
-  .argument('<filepath2>');
-
-program.parse(process.argv);
-
-const { args } = program;
-const options = program.opts();
-const { filePath1, filePath2 } = options; */
-
-const $file1 = {
-  host: 'hexlet.io',
-  timeout: 50,
-  proxy: '123.234.53.22',
-  follow: false,
-};
-const $file2 = {
-  timeout: 20,
-  verbose: true,
-  host: 'hexlet.io',
-};
-
-const result = {};
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
 
 const fileComparison = (file1, file2) => {
+  const result = {};
   _.forIn(file1, (value, key) => {
     const newMinusKey = `- ${key}`;
     const newPlusKey = `+ ${key}`;
@@ -60,7 +30,35 @@ const fileComparison = (file1, file2) => {
       result[newPlusKey] = value;
     }
   });
-  return result;
+  return JSON.stringify(result, ' ', 2);
 };
+
+let $file1;
+let $file2;
+
+const program = new Command();
+
+program
+  .description('Compares two configuration files and shows a difference.')
+  .version('1.0.0')
+  .arguments('<filepath1> <filepath2>')
+  .helpOption('-h, --help', 'output usage information')
+  .option('-f, --format <type>', 'output format')
+  .action((filePath1, filePath2) => {
+    const fullPath1 = path.resolve(filePath1);
+    const fullPath2 = path.resolve(filePath2);
+    if (existsSync(fullPath1)) {
+      $file1 = JSON.parse(readFileSync(fullPath1));
+    } else {
+      throw new Error('File-1 not found');
+    }
+    if (existsSync(filePath2)) {
+      $file2 = JSON.parse(readFileSync(fullPath2));
+    } else {
+      throw new Error('File-2 not found');
+    }
+  });
+
+program.parse(process.argv);
 
 console.log(fileComparison($file1, $file2));
