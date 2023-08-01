@@ -62,3 +62,5 @@ program
 program.parse(process.argv);
 
 console.log(fileComparison($file1, $file2));
+
+export default fileComparison;
