@@ -22,4 +22,8 @@ gendiff --version:
 gendiff:
 	node bin/gendiff.js
 
+test:
+	npm test
+
 .PHONY: gendiff
+.PHONY: test
