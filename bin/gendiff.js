@@ -26,23 +26,23 @@ const fileComparison = (file1, file2) => {
   _.forIn($file1, (value, key) => {
     const newMinusKey = `- ${key}`;
     const newPlusKey = `+ ${key}`;
-    if (!Object.hasOwn(file2, key)) {
+    if (!Object.hasOwn($file2, key)) {
       result[newMinusKey] = value;
     }
 
-    if (Object.hasOwn(file2, key) && value === file2[key]) {
+    if (Object.hasOwn($file2, key) && value === $file2[key]) {
       result[key] = value;
     }
 
-    if (Object.hasOwn(file2, key) && value !== file2[key]) {
-      result[newMinusKey] = file1[key];
-      result[newPlusKey] = file2[key];
+    if (Object.hasOwn($file2, key) && value !== $file2[key]) {
+      result[newMinusKey] = $file1[key];
+      result[newPlusKey] = $file2[key];
     }
   });
 
   _.forIn($file2, (value, key) => {
     const newPlusKey = `+ ${key}`;
-    if (!Object.hasOwn(file1, key)) {
+    if (!Object.hasOwn($file1, key)) {
       result[newPlusKey] = value;
     }
   });
