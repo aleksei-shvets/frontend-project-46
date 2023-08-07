@@ -61,6 +61,6 @@ program
     console.log(fileComparison(filePath1, filePath2));
   });
 
-program.parse();
+program.parse(process.argv);
 
 export default fileComparison;
