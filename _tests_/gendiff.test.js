@@ -1,9 +1,4 @@
-import { readFileSync } from 'fs';
-import fileComparison from '../bin/gendiff.js';
-
-const path = require('path');
-
-const getFullPath = (filename) => path.resolve(__dirname, '__fixtures__', filename);
+import fileComparison from '../src/fileComparison.js';
 
 const output = {
   host: 'hexlet.io',
@@ -13,11 +8,10 @@ const output = {
   '- follow': false,
   '+ verbose': true,
 };
+const equal = JSON.stringify(output, ' ', 2);
 
 test('gendiff output', () => {
-  const filePath1 = getFullPath('file1.json');
-  const filePath2 = getFullPath('file2.json');
-  expect(() => {
-    fileComparison(filePath1, filePath2);
-  }).toEqual(output);
+  const filePath1 = './__fixtures__/file1.json';
+  const filePath2 = './__fixtures__/file2.json';
+  expect(fileComparison(filePath1, filePath2)).toEqual(equal);
 });
