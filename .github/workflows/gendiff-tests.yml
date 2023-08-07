@@ -9,7 +9,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '20'
-      - run: make install
-      - run: make lint
-      - run: make test
+      - name: install
+        run:
+          npm ci
+      - name: run eslint
+        run: npx eslint .
+      - name: run test
+        run: npx jest --watch
 
