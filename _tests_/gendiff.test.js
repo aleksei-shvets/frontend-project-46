@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
 import fileComparison from '../src/fileComparison.js';
 
 const __filename = fileURLToPath(import.meta.url);
