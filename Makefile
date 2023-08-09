@@ -23,10 +23,10 @@ gendiff:
 	node bin/gendiff.js
 
 test:
-	npx jest --watch
+	npx jest
 
 test-coverage:
-	npx jest --coverage --watch --coverageProvider=v8
+	npx jest --coverage --coverageProvider=v8
 
 .PHONY: gendiff
 .PHONY: test
