@@ -5,6 +5,11 @@ import fileParse from './fileParse.js';
 
 const readFile = (file) => readFileSync(path.resolve(file), 'utf-8');
 
+const hasPath = (filePath) => {
+  if (existsSync(filePath)) return true;
+  throw new Error(`${filePath} <<< this file not found`);
+};
+
 export default (file1, file2) => {
   const result = {};
 
@@ -13,16 +18,11 @@ export default (file1, file2) => {
   const extension1 = path.extname(file1);
   const extension2 = path.extname(file2);
 
-  if (existsSync(file1)) {
+  if (hasPath(file1)) {
     fileContent1 = fileParse(readFile(file1), extension1);
-  } else {
-    throw new Error(`${file1} <<< this file not found`);
   }
-
-  if (existsSync(file2)) {
+  if (hasPath(file2)) {
     fileContent2 = fileParse(readFile(file2), extension2);
-  } else {
-    throw new Error(`${file2} <<< this file not found`);
   }
 
   _.forIn(fileContent1, (value, key) => {
