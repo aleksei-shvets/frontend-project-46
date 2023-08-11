@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fileComparison from '../src/fileComparison.js';
+import filesCompare from '../src/filesCompare.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,10 +17,17 @@ const output = {
   '- follow': false,
   '+ verbose': true,
 };
+
 const equal = JSON.stringify(output, ' ', 2);
 
-test('gendiff output', () => {
+test('gendiff output JSON', () => {
   const filePath1 = readFile('file1.json');
   const filePath2 = readFile('file2.json');
-  expect(fileComparison(filePath1, filePath2)).toEqual(equal);
+  expect(filesCompare(filePath1, filePath2)).toEqual(equal);
+});
+
+test('gendiff output JSON', () => {
+  const filePath1 = readFile('file1.yaml');
+  const filePath2 = readFile('file2.yaml');
+  expect(filesCompare(filePath1, filePath2)).toEqual(equal);
 });
