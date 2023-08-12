@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import fileParse from './fileParse.js';
+import fileParse from './parsers.js';
 
 const readFile = (file) => readFileSync(path.resolve(file), 'utf8');
 
