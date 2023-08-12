@@ -17,7 +17,7 @@ test('gendiff output JSON', () => {
 });
 
 test('gendiff output JSON', () => {
-  const filePath1 = getFixturePath('file1.yaml');
+  const filePath1 = getFixturePath('file1.yml');
   const filePath2 = getFixturePath('file2.yaml');
   expect(filesCompare(filePath1, filePath2)).toEqual(readFile('correctout.txt'));
 });
