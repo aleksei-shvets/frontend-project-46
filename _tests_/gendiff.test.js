@@ -1,33 +1,23 @@
 /* eslint-disable no-underscore-dangle */
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, join, resolve} from 'path';
+import { readFileSync } from 'node:fs';
 import filesCompare from '../src/filesCompare.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
-const readFile = (filename) => getFixturePath(filename);
-
-const output = {
-  host: 'hexlet.io',
-  '- timeout': 50,
-  '+ timeout': 20,
-  '- proxy': '123.234.53.22',
-  '- follow': false,
-  '+ verbose': true,
-};
-
-const equal = JSON.stringify(output, ' ', 2);
+const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf8');
 
 test('gendiff output JSON', () => {
-  const filePath1 = readFile('file1.json');
-  const filePath2 = readFile('file2.json');
-  expect(filesCompare(filePath1, filePath2)).toEqual(equal);
+  const filePath1 = getFixturePath('file1.json');
+  const filePath2 = getFixturePath('file2.json');
+  expect(filesCompare(filePath1, filePath2)).toEqual(readFile('correctout.txt'));
 });
 
 test('gendiff output JSON', () => {
-  const filePath1 = readFile('file1.yaml');
-  const filePath2 = readFile('file2.yaml');
-  expect(filesCompare(filePath1, filePath2)).toEqual(equal);
+  const filePath1 = getFixturePath('file1.yaml');
+  const filePath2 = getFixturePath('file2.yaml');
+  expect(filesCompare(filePath1, filePath2)).toEqual(readFile('correctout.txt'));
 });
