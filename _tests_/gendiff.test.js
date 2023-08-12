@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { fileURLToPath } from 'url';
-import { dirname, join, resolve} from 'path';
+import { dirname, join } from 'path';
 import { readFileSync } from 'node:fs';
 import filesCompare from '../src/filesCompare.js';
 
