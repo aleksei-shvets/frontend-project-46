@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import filesCompare from '../src/filesCompare.js';
+import genDiffTree from '../src/genDiffTree.js';
+import formater from '../src/stylish.js';
 
 const program = new Command();
 
@@ -12,7 +13,8 @@ program
   .helpOption('-h, --help', 'output usage information')
   .option('-f, --format <type>', 'output format')
   .action((filePath1, filePath2) => {
-    console.log(filesCompare(filePath1, filePath2));
+    const tree = genDiffTree(filePath1, filePath2);
+    console.log(formater(tree));
   });
 
 program.parse(process.argv);
