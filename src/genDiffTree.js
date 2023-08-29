@@ -65,32 +65,3 @@ export default (file1, file2) => {
   };
   return compareFiles(content1, content2);
 };
-
-/*
-
-const compareFiles = (fileContent1, fileContent2) => {
-    const keys = Object.keys({ ...fileContent1, ...fileContent2 });
-    const tree = _.sortBy(keys, (key) => key)
-      .map((key) => {
-        if (isObjectAndNotArray(fileContent1[key]) && isObjectAndNotArray(fileContent2[key])) {
-          return { type: 'node', key: `${key}`, value: compareFiles(fileContent1[key], fileContent2[key]) };
-        }
-
-        if (Object.hasOwn(fileContent1, key) && Object.hasOwn(fileContent1, key)) {
-          if (fileContent1[key] === fileContent2[key]) {
-            return { type: 'notchanged', key: `${key}`, value: fileContent1[key], };
-          }
-          return {
-            type: 'changed', key: `${key}`, value1: fileContent1[key], value2: fileContent2[key],
-          };
-        }
-
-        if (Object.hasOwn(fileContent1, key) && !Object.hasOwn(fileContent1, key)) {
-          return { type: 'deleted', key: `${key}`, value: fileContent1[key], };
-        }
-        return { type: 'added', key: `${key}`, value: fileContent2[key] };
-      });
-    return tree;
-  };
-
-*/
