@@ -9,6 +9,12 @@ export default (tree) => {
         if (object.type === 'changed') {
           return `${tab.repeat(level)}- ${object.key}: ${object.value1}\n${tab.repeat(level)}+ ${object.key}: ${object.value2}`;
         }
+        if (object.type === 'added') {
+          return `${tab.repeat(level)}+ ${object.key}: ${object.value}`;
+        }
+        if (object.type === 'deleted') {
+          return `${tab.repeat(level)}- ${object.key}: ${object.value}`;
+        }
       }
       return `${tab.repeat(level)}${object.key}: ${iter(object.value, level + 1)}`;
     }).join('\n');
