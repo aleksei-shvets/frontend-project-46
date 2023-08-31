@@ -11,7 +11,7 @@ program
   .version('1.0.0')
   .arguments('<filepath1> <filepath2>')
   .helpOption('-h, --help', 'output usage information')
-  .option('-f, --format <type>', 'output format')
+  .option('-f, --format <type>', 'output format', 'stylish')
   .action((filePath1, filePath2) => {
     const tree = genDiffTree(filePath1, filePath2);
     console.log(formater(tree));
