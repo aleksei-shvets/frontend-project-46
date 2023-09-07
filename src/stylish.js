@@ -19,7 +19,7 @@ const stringify = (object, level = 0) => {
         if (!_.isObject(value)) {
           return `${key}: ${value}`;
         }
-        return `${key}: ${iter(value, (depth + level + 1))}`;
+        return `${key}: ${iter(value, depth + 1)}`;
       })
       .join(`\n${genTab(4, depth + level)}`);
     return `{\n${genTab(4, depth + level)}${string}\n${genTab(4, depth - 1 + level)}}`;
@@ -29,20 +29,19 @@ const stringify = (object, level = 0) => {
 
 export default (tree) => {
   const iter = (treeArray, level = 1) => {
-    const tab = '  ';
     const result = treeArray.map((object) => {
       if (object.type !== 'node') {
         if (object.type === 'notchanged') {
-          return `${genTab(5, level)}${object.key}: ${stringify(object.value, level)}`;
+          return `${genTab(4, level)}${object.key}: ${stringify(object.value, level)}`;
         }
         if (object.type === 'changed') {
-          return `${genTab(4, level)}- ${object.key}: ${stringify(object.value1, level)}\n${tab.repeat(4, level)}+ ${object.key}: ${stringify(object.value2)}`;
+          return `${genTab(3, level)}- ${object.key}: ${stringify(object.value1, level)}\n${genTab(3, level)}+ ${object.key}: ${stringify(object.value2)}`;
         }
         if (object.type === 'added') {
-          return `${genTab(4, level)}+ ${object.key}: ${stringify(object.value, level)}`;
+          return `${genTab(3, level)}+ ${object.key}: ${stringify(object.value, level)}`;
         }
         if (object.type === 'deleted') {
-          return `${genTab(4, level)}- ${object.key}: ${stringify(object.value, level)}`;
+          return `${genTab(3, level)}- ${object.key}: ${stringify(object.value, level)}`;
         }
       }
       return `${genTab(4, level)}${object.key}: ${iter(object.value, level + 1)}`;
