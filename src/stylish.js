@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-const genTab = (spaces, level = 1) => {
+const genTab = (spaceCount, level = 1) => {
   const oneSpace = ' ';
-  return oneSpace.repeat(spaces * level);
+  return oneSpace.repeat(spaceCount * level);
 };
 
 const stringify = (object, level = 0) => {
