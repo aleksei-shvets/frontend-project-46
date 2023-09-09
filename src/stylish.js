@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-const genTab = (spaceCount, level = 1) => {
+const genTab = (level = 1) => {
   const oneSpace = ' ';
-  return oneSpace.repeat(spaceCount * level);
+  return oneSpace.repeat(level);
 };
 
 const stringify = (object, level = 0) => {
-  const iter = (element, depth = 1) => {
+  const iter = (element, depth = 1, spaceCount = 4) => {
     if (!_.isObject(element)) {
       return element;
     }
@@ -21,32 +21,32 @@ const stringify = (object, level = 0) => {
         }
         return `${key}: ${iter(value, depth + 1)}`;
       })
-      .join(`\n${genTab(4, depth + level)}`);
-    return `{\n${genTab(4, depth + level)}${string}\n${genTab(4, depth - 1 + level)}}`;
+      .join(`\n${genTab(spaceCount * (depth + level))}`);
+    return `{\n${genTab(spaceCount * (depth + level))}${string}\n${genTab(spaceCount * (depth - 1 + level))}}`;
   };
   return iter(object);
 };
 
 export default (tree) => {
-  const iter = (treeArray, level = 1) => {
+  const iter = (treeArray, level = 1, spaceCount = 4) => {
     const result = treeArray.map((object) => {
       if (object.type !== 'node') {
         if (object.type === 'notchanged') {
-          return `${genTab(4, level)}${object.key}: ${stringify(object.value, level)}`;
+          return `${genTab(spaceCount * level)}${object.key}: ${stringify(object.value, level)}`;
         }
         if (object.type === 'changed') {
-          return `${genTab(3, level)}- ${object.key}: ${stringify(object.value1, level)}\n${genTab(3, level)}+ ${object.key}: ${stringify(object.value2)}`;
+          return `${genTab(spaceCount * level - 2)}- ${object.key}: ${stringify(object.value1, level)}\n${genTab(spaceCount * level - 2)}+ ${object.key}: ${stringify(object.value2)}`;
         }
         if (object.type === 'added') {
-          return `${genTab(3, level)}+ ${object.key}: ${stringify(object.value, level)}`;
+          return `${genTab(spaceCount * level - 2)}+ ${object.key}: ${stringify(object.value, level)}`;
         }
         if (object.type === 'deleted') {
-          return `${genTab(3, level)}- ${object.key}: ${stringify(object.value, level)}`;
+          return `${genTab(spaceCount * level - 2)}- ${object.key}: ${stringify(object.value, level)}`;
         }
       }
-      return `${genTab(4, level)}${object.key}: ${iter(object.value, level + 1)}`;
+      return `${genTab(spaceCount * level)}${object.key}: ${iter(object.value, level + 1)}`;
     }).join('\n');
-    return `{\n${result}\n${genTab(4, level - 1)}}`;
+    return `{\n${result}\n${genTab(spaceCount * (level - 1))}}`;
   };
   return iter(tree);
 };
