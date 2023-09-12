@@ -46,7 +46,6 @@ export default (file1, file2) => {
             value: fileContent2[key],
           };
         }
-
         if (fileContent1[key] === fileContent2[key]) {
           return {
             type: 'notchanged',
