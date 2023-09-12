@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import genDiff from '../src/formaters/index.js';
 import genDiffTree from '../src/genDiffTree.js';
-import formater from '../src/stylish.js';
+import formater from '../src/formaters/stylish.js';
 
 const program = new Command();
 
