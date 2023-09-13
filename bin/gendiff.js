@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 import genDiff from '../src/formaters/index.js';
-import genDiffTree from '../src/genDiffTree.js';
+import makeDiffTree from '../src/makeDiffTree.js';
 
 const program = new Command();
 
@@ -13,7 +13,7 @@ program
   .helpOption('-h, --help', 'output usage information')
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filePath1, filePath2) => {
-    const tree = genDiffTree(filePath1, filePath2);
+    const tree = makeDiffTree(filePath1, filePath2);
     console.log(genDiff(tree, program.opts().format));
   });
 
