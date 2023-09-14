@@ -4,6 +4,8 @@ const genIndent = (level = 1) => (' ').repeat(level);
 
 const stringify = (object, level = 0) => {
   const iter = (element, depth = 1, spaceCount = 4) => {
+    const indent = genIndent(spaceCount * (depth + level));
+    const closingIndent = genIndent(spaceCount * (depth + level - 1));
     if (!_.isObject(element)) return element;
 
     const entries = Object.entries(element);
@@ -13,9 +15,9 @@ const stringify = (object, level = 0) => {
       if (!_.isObject(value)) return `${key}: ${value}`;
       return `${key}: ${iter(value, depth + 1)}`;
     })
-      .join(`\n${genIndent(spaceCount * (depth + level))}`);
+      .join(`\n${indent}`);
 
-    return `{\n${genIndent(spaceCount * (depth + level))}${string}\n${genIndent(spaceCount * (depth + level - 1))}}`;
+    return `{\n${indent}${string}\n${closingIndent}}`;
   };
   return iter(object);
 };
