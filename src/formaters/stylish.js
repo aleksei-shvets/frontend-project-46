@@ -4,21 +4,17 @@ const genIndent = (level = 1) => (' ').repeat(level);
 
 const stringify = (object, level = 0) => {
   const iter = (element, depth = 1, spaceCount = 4) => {
-    if (!_.isObject(element)) {
-      return element;
-    }
+    if (!_.isObject(element)) return element;
+
     const entries = Object.entries(element);
-    if (entries.length === 0) {
-      return '{}';
-    }
-    const string = entries
-      .map(([key, value]) => {
-        if (!_.isObject(value)) {
-          return `${key}: ${value}`;
-        }
-        return `${key}: ${iter(value, depth + 1)}`;
-      })
+    if (entries.length === 0) return '{}';
+
+    const string = entries.map(([key, value]) => {
+      if (!_.isObject(value)) return `${key}: ${value}`;
+      return `${key}: ${iter(value, depth + 1)}`;
+    })
       .join(`\n${genIndent(spaceCount * (depth + level))}`);
+
     return `{\n${genIndent(spaceCount * (depth + level))}${string}\n${genIndent(spaceCount * (depth + level - 1))}}`;
   };
   return iter(object);
