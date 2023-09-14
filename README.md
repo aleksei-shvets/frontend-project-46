@@ -18,11 +18,11 @@
 
 ### minimum requirements
 
-node.js 20.0.0
-make
-commander 11.0.0
-js-yaml 4.1.0
-lodash 4.17.21
+- node.js 20.0.0
+- make
+- commander 11.0.0
+- js-yaml 4.1.0
+- lodash 4.17.21
 
 ### install
 
@@ -34,24 +34,18 @@ help
 
 ```bash
 gendiff --help -h
-```
-
-\
-\
-
+```  
+  
 using package
 
 ```bash
 gendiff <path1> <path2> [OPTIONS...]
-```
-
-\
-\
-
+```  
+  
 Options:
-  -V, --version        output the version number
-  -f, --format {type}  output format (default: "stylish")
-  -h, --help           output usage information
+  -V, --version        output the version number  
+  -f, --format {type}  output format (default: "stylish")  
+  -h, --help           output usage information  
 
 ### asciinema
 
