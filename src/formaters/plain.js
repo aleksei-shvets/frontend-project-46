@@ -1,10 +1,6 @@
 const valueStringify = (item) => {
-  if (item instanceof Object) {
-    return '[complex value]';
-  }
-  if (typeof item === 'string') {
-    return `'${item}'`;
-  }
+  if (item instanceof Object) return '[complex value]';
+  if (typeof item === 'string') return `'${item}'`;
   return item;
 };
 
