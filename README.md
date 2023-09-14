@@ -1,7 +1,5 @@
 # GENDIFF
 
-## Description
-
 This CLI utility compares two files and displays the differences found in one of the available formats. The output format is optional. Valid file extensions: json, yaml, yml
 ___
 
