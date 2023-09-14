@@ -31,7 +31,7 @@ gendiff --help -h
 
 <br>
 
-using package
+run package
 
 ```bash
 gendiff <path1> <path2> [OPTIONS...]
