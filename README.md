@@ -36,11 +36,17 @@ help
 gendiff --help -h
 ```
 
+\
+\
+
 using package
 
 ```bash
 gendiff <path1> <path2> [OPTIONS...]
 ```
+
+\
+\
 
 Options:
   -V, --version        output the version number
