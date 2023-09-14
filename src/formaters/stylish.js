@@ -1,9 +1,6 @@
 import _ from 'lodash';
 
-const genTab = (level = 1) => {
-  const oneSpace = ' ';
-  return oneSpace.repeat(level);
-};
+const genIndent = (level = 1) => (' ').repeat(level);
 
 const stringify = (object, level = 0) => {
   const iter = (element, depth = 1, spaceCount = 4) => {
@@ -21,8 +18,8 @@ const stringify = (object, level = 0) => {
         }
         return `${key}: ${iter(value, depth + 1)}`;
       })
-      .join(`\n${genTab(spaceCount * (depth + level))}`);
-    return `{\n${genTab(spaceCount * (depth + level))}${string}\n${genTab(spaceCount * (depth - 1 + level))}}`;
+      .join(`\n${genIndent(spaceCount * (depth + level))}`);
+    return `{\n${genIndent(spaceCount * (depth + level))}${string}\n${genIndent(spaceCount * (depth + level - 1))}}`;
   };
   return iter(object);
 };
@@ -31,22 +28,22 @@ export default (tree) => {
   const iter = (treeArray, level = 1, spaceCount = 4) => {
     const result = treeArray.map((object) => {
       if (object.type !== 'node') {
-        if (object.type === 'notchanged') {
-          return `${genTab(spaceCount * level)}${object.key}: ${stringify(object.value, level)}`;
-        }
-        if (object.type === 'changed') {
-          return `${genTab(spaceCount * level - 2)}- ${object.key}: ${stringify(object.value1, level)}\n${genTab(spaceCount * level - 2)}+ ${object.key}: ${stringify(object.value2)}`;
-        }
-        if (object.type === 'added') {
-          return `${genTab(spaceCount * level - 2)}+ ${object.key}: ${stringify(object.value, level)}`;
-        }
-        if (object.type === 'deleted') {
-          return `${genTab(spaceCount * level - 2)}- ${object.key}: ${stringify(object.value, level)}`;
+        switch (object.type) {
+          case 'notchanged':
+            return `${genIndent(spaceCount * level)}${object.key}: ${stringify(object.value, level)}`;
+          case 'changed':
+            return `${genIndent(spaceCount * level - 2)}- ${object.key}: ${stringify(object.value1, level)}\n${genIndent(spaceCount * level - 2)}+ ${object.key}: ${stringify(object.value2)}`;
+          case 'added':
+            return `${genIndent(spaceCount * level - 2)}+ ${object.key}: ${stringify(object.value, level)}`;
+          case 'deleted':
+            return `${genIndent(spaceCount * level - 2)}- ${object.key}: ${stringify(object.value, level)}`;
+          default:
+            throw new Error(`Unknown node in tree ${tree}`);
         }
       }
-      return `${genTab(spaceCount * level)}${object.key}: ${iter(object.value, level + 1)}`;
+      return `${genIndent(spaceCount * level)}${object.key}: ${iter(object.value, level + 1)}`;
     }).join('\n');
-    return `{\n${result}\n${genTab(spaceCount * (level - 1))}}`;
+    return `{\n${result}\n${genIndent(spaceCount * (level - 1))}}`;
   };
   return iter(tree);
 };
