@@ -12,8 +12,9 @@ const stringify = (object, level = 0) => {
     if (entries.length === 0) return '{}';
 
     const string = entries.map(([key, value]) => (
-      (!_.isObject(value)) ? `${key}: ${value}` : `${key}: ${iter(value, depth + 1)}`))
-      .join(`\n${indent}`);
+      (!_.isObject(value))
+        ? `${key}: ${value}`
+        : `${key}: ${iter(value, depth + 1)}`)).join(`\n${indent}`);
 
     return `{\n${indent}${string}\n${closingIndent}}`;
   };
