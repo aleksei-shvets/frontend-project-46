@@ -34,15 +34,19 @@ help
 
 ```bash
 gendiff --help -h
-```  
-  
+```
+
+<br>
+
 using package
 
 ```bash
 gendiff <path1> <path2> [OPTIONS...]
-```  
-  
-Options:
+```
+
+<br>
+
+Options:  
   -V, --version        output the version number  
   -f, --format {type}  output format (default: "stylish")  
   -h, --help           output usage information  
