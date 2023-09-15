@@ -32,7 +32,7 @@ export default (tree) => {
           case 'notchanged':
             return `${standardIndent}${object.key}: ${stringify(object.value, level)}`;
           case 'changed':
-            return `${offsetIndent}- ${object.key}: ${stringify(object.value1, level)}\n${offsetIndent}+ ${object.key}: ${stringify(object.value2)}`;
+            return `${offsetIndent}- ${object.key}: ${stringify(object.value1, level)}\n${offsetIndent}+ ${object.key}: ${stringify(object.value2, level)}`;
           case 'added':
             return `${offsetIndent}+ ${object.key}: ${stringify(object.value, level)}`;
           case 'deleted':
