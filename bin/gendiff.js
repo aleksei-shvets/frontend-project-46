@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import genDiff from '../src/formaters/index.js';
+import genDiff from '../src/index.js';
 import makeDiffTree from '../src/makeDiffTree.js';
 
 const program = new Command();
