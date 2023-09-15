@@ -17,7 +17,9 @@ Hexlet tests | Tests and linter | CodeClimate | Test Coverage
 
 ### install
 
+```bash
 npm install frontend-project-46
+```
 
 <br>
 
