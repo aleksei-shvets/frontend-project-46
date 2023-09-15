@@ -17,21 +17,24 @@ const pathYaml2 = getFixturePath('file2.yaml');
 
 describe('stylish format', () => {
   test('stylish format output', () => {
-    expect(genDiff(pathJson1, pathJson2)).toEqual(readFile('correctStylish.txt'));
-    expect(genDiff(pathYaml1, pathYaml2, 'stylish')).toEqual(readFile('correctStylish.txt'));
+    const expectedValue = readFile('correctStylish.txt');
+    expect(genDiff(pathJson1, pathJson2)).toEqual(expectedValue);
+    expect(genDiff(pathYaml1, pathYaml2, 'stylish')).toEqual(expectedValue);
   });
 });
 
 describe('plain format', () => {
   test('plain format output', () => {
-    expect(genDiff(pathJson1, pathJson2, 'plain')).toEqual(readFile('correctPlain.txt'));
-    expect(genDiff(pathYaml1, pathYaml2, 'plain')).toEqual(readFile('correctPlain.txt'));
+    const expectedValue = readFile('correctPlain.txt');
+    expect(genDiff(pathJson1, pathJson2, 'plain')).toEqual(expectedValue);
+    expect(genDiff(pathYaml1, pathYaml2, 'plain')).toEqual(expectedValue);
   });
 });
 
 describe('JSON format', () => {
   test('JSON format output', () => {
-    expect(genDiff(pathJson1, pathJson2, 'json')).toEqual(readFile('correctJsonFormat.txt'));
-    expect(genDiff(pathYaml1, pathYaml2, 'json')).toEqual(readFile('correctJsonFormat.txt'));
+    const expectedValue = readFile('correctJsonFormat.txt');
+    expect(genDiff(pathJson1, pathJson2, 'json')).toEqual(expectedValue);
+    expect(genDiff(pathYaml1, pathYaml2, 'json')).toEqual(expectedValue);
   });
 });
