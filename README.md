@@ -40,6 +40,6 @@ Options:
   -f, --format {type}  output format (default: "stylish")  
   -h, --help           output usage information  
 
-### asciinema
+### How it works
 
 [![asciicast](https://asciinema.org/a/Vmnttki48TJr8uMVcYy2AszUt.svg)](https://asciinema.org/a/Vmnttki48TJr8uMVcYy2AszUt)
