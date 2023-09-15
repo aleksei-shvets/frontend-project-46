@@ -7,7 +7,7 @@ Hexlet tests | Tests and linter | CodeClimate | Test Coverage
 :-----: | :----: | :----:  | :----:
 [![Actions Status](https://github.com/aleksei-shvets/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/aleksei-shvets/frontend-project-46/actions)   | [![gendiff-tests](https://github.com/aleksei-shvets/frontend-project-46/actions/workflows/gendiff-tests.yml/badge.svg)](https://github.com/aleksei-shvets/frontend-project-46/actions/workflows/gendiff-tests.yml) | [![Maintainability](https://api.codeclimate.com/v1/badges/bf3ea277f56b6f375f6a/maintainability)](https://codeclimate.com/github/aleksei-shvets/frontend-project-46/maintainability)  | [![Test Coverage](https://api.codeclimate.com/v1/badges/bf3ea277f56b6f375f6a/test_coverage)](https://codeclimate.com/github/aleksei-shvets/frontend-project-46/test_coverage)
 
-### minimum requirements
+## minimum requirements
 
 - node.js 20.0.0
 - make
@@ -21,25 +21,19 @@ Hexlet tests | Tests and linter | CodeClimate | Test Coverage
 npm install frontend-project-46
 ```
 
-<br>
-
 ### usage
 
-help
+#### help
 
 ```bash
 gendiff --help -h
 ```
 
-<br>
-
-run package
+#### run package
 
 ```bash
 gendiff <path1> <path2> [OPTIONS...]
 ```
-
-<br>
 
 Options:  
   -V, --version        output the version number  
