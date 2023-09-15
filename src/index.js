@@ -1,5 +1,5 @@
-import stylish from './stylish.js';
-import plain from './plain.js';
+import stylish from './formaters/stylish.js';
+import plain from './formaters/plain.js';
 
 export default (tree, formatName) => {
   switch (formatName) {
