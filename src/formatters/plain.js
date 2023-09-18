@@ -9,18 +9,19 @@ const getFullPath = (path, key) => (path ? `${path}.${key}` : key);
 export default (tree) => {
   const iter = (treeArray, currentPath = '') => {
     const result = Array.isArray(treeArray) ? treeArray.map((object) => {
-      if (object.type === 'changed') {
-        return `Property '${getFullPath(currentPath, object.key)}' was updated. From ${valueStringify(object.value1)} to ${valueStringify(object.value2)}`;
-      }
-      if (object.type === 'added') {
-        return `Property '${getFullPath(currentPath, object.key)}' was added with value: ${valueStringify(object.value)}`;
-      }
-      if (object.type === 'deleted') {
-        return `Property '${getFullPath(currentPath, object.key)}' was removed`;
-      }
-      if (object.type === 'nested') {
-        const currentLevelPath = getFullPath(currentPath, object.key);
-        return iter(object.children, currentLevelPath);
+      switch (object.type) {
+        case 'changed':
+          return `Property '${getFullPath(currentPath, object.key)}' was updated. From ${valueStringify(object.value1)} to ${valueStringify(object.value2)}`;
+        case 'added':
+          return `Property '${getFullPath(currentPath, object.key)}' was added with value: ${valueStringify(object.value)}`;
+        case 'deleted':
+          return `Property '${getFullPath(currentPath, object.key)}' was removed`;
+        case 'nested':
+          return iter(object.children, getFullPath(currentPath, object.key));
+        case 'notchanged':
+          return null;
+        default:
+          throw new Error(`Unknown node in tree ${tree}`);
       }
     }).filter(Boolean).join('\n') : undefined;
     return result;
