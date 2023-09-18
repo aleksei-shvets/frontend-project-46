@@ -27,21 +27,20 @@ export default (tree) => {
     const offsetIndent = genIndent(spaceCount * level - 2);
     const closingIndent = genIndent(spaceCount * (level - 1));
     const result = treeArray.map((object) => {
-      if (object.type !== 'nested') {
-        switch (object.type) {
-          case 'notchanged':
-            return `${standardIndent}${object.key}: ${stringify(object.value, level)}`;
-          case 'changed':
-            return `${offsetIndent}- ${object.key}: ${stringify(object.value1, level)}\n${offsetIndent}+ ${object.key}: ${stringify(object.value2, level)}`;
-          case 'added':
-            return `${offsetIndent}+ ${object.key}: ${stringify(object.value, level)}`;
-          case 'deleted':
-            return `${offsetIndent}- ${object.key}: ${stringify(object.value, level)}`;
-          default:
-            throw new Error(`Unknown node in tree ${tree}`);
-        }
+      switch (object.type) {
+        case 'notchanged':
+          return `${standardIndent}${object.key}: ${stringify(object.value, level)}`;
+        case 'changed':
+          return `${offsetIndent}- ${object.key}: ${stringify(object.value1, level)}\n${offsetIndent}+ ${object.key}: ${stringify(object.value2, level)}`;
+        case 'added':
+          return `${offsetIndent}+ ${object.key}: ${stringify(object.value, level)}`;
+        case 'deleted':
+          return `${offsetIndent}- ${object.key}: ${stringify(object.value, level)}`;
+        case 'nested':
+          return `${standardIndent}${object.key}: ${iter(object.children, level + 1)}`;
+        default:
+          throw new Error(`Unknown node in tree ${tree}`);
       }
-      return `${standardIndent}${object.key}: ${iter(object.children, level + 1)}`;
     }).join('\n');
     return `{\n${result}\n${closingIndent}}`;
   };
