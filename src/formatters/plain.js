@@ -8,7 +8,7 @@ const getFullPath = (path, key) => (path ? `${path}.${key}` : key);
 
 export default (tree) => {
   const iter = (treeArray, currentPath = '') => {
-    const result = Array.isArray(treeArray) ? treeArray.map((object) => {
+    const result = treeArray.map((object) => {
       switch (object.type) {
         case 'changed':
           return `Property '${getFullPath(currentPath, object.key)}' was updated. From ${valueStringify(object.value1)} to ${valueStringify(object.value2)}`;
@@ -23,7 +23,7 @@ export default (tree) => {
         default:
           throw new Error(`Unknown node in tree ${tree}`);
       }
-    }).filter(Boolean).join('\n') : undefined;
+    }).join('\n');
     return result;
   };
   return iter(tree);
