@@ -7,10 +7,10 @@ const makeDiffTree = (obj1, obj2) => {
       if (_.isPlainObject(obj1[key]) && _.isPlainObject(obj2[key])) {
         return { type: 'node', key: `${key}`, value: makeDiffTree(obj1[key], obj2[key]) };
       }
-      if (_.has(obj1, key) && !_.has(obj2, key)) {
+      if (!_.has(obj2, key)) {
         return { type: 'deleted', key: `${key}`, value: obj1[key] };
       }
-      if (!_.has(obj1, key) && _.has(obj2, key)) {
+      if (!_.has(obj1, key)) {
         return { type: 'added', key: `${key}`, value: obj2[key] };
       }
       if (obj1[key] === obj2[key]) {
