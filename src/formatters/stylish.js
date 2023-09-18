@@ -27,7 +27,7 @@ export default (tree) => {
     const offsetIndent = genIndent(spaceCount * level - 2);
     const closingIndent = genIndent(spaceCount * (level - 1));
     const result = treeArray.map((object) => {
-      if (object.type !== 'node') {
+      if (object.type !== 'nested') {
         switch (object.type) {
           case 'notchanged':
             return `${standardIndent}${object.key}: ${stringify(object.value, level)}`;
@@ -41,7 +41,7 @@ export default (tree) => {
             throw new Error(`Unknown node in tree ${tree}`);
         }
       }
-      return `${standardIndent}${object.key}: ${iter(object.value, level + 1)}`;
+      return `${standardIndent}${object.key}: ${iter(object.children, level + 1)}`;
     }).join('\n');
     return `{\n${result}\n${closingIndent}}`;
   };

@@ -9,7 +9,7 @@ const getFullPath = (path, key) => (path ? `${path}.${key}` : key);
 export default (tree) => {
   const iter = (treeArray, currentPath = '') => {
     const result = Array.isArray(treeArray) ? treeArray.map((object) => {
-      if (object.type !== 'node') {
+      if (object.type !== 'nested') {
         if (object.type === 'changed') {
           return `Property '${getFullPath(currentPath, object.key)}' was updated. From ${valueStringify(object.value1)} to ${valueStringify(object.value2)}`;
         }
@@ -21,7 +21,7 @@ export default (tree) => {
         }
       }
       const currentLevelPath = getFullPath(currentPath, object.key);
-      return iter(object.value, currentLevelPath);
+      return iter(object.children, currentLevelPath);
     }).filter(Boolean).join('\n') : undefined;
     return result;
   };
