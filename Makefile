@@ -12,6 +12,3 @@ test:
 
 test-coverage:
 	npx jest --coverage --coverageProvider=v8
-
-.PHONY: gendiff
-.PHONY: test
