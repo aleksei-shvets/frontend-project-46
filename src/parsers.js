@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import yaml from 'js-yaml';
 
-export default (file, extention) => {
-  if (extention === '.yml' || extention === '.yaml') {
+export default (file, fileType) => {
+  if (fileType === 'yml' || fileType === 'yaml') {
     return yaml.load(file);
   }
-  if (extention === '.json') {
+  if (fileType === 'json') {
     return JSON.parse(file);
   }
-  throw new Error(`${extention} - extention not supported`);
+  throw new Error(`${fileType} - extention not supported`);
 };
