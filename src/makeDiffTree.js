@@ -13,7 +13,7 @@ const makeDiffTree = (obj1, obj2) => {
       if (!_.has(obj1, key)) {
         return { type: 'added', key: `${key}`, value: obj2[key] };
       }
-      if (obj1[key] === obj2[key]) {
+      if (_.isEqual(obj1[key], obj2[key])) {
         return { type: 'notchanged', key: `${key}`, value: obj1[key] };
       }
       return {
