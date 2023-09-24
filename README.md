@@ -36,9 +36,7 @@ gendiff <path1> <path2> [OPTIONS...]
 ```
 
 Options:  
-  -V, --version        output the version number  
   -f, --format {type}  output format (default: "stylish")  
-  -h, --help           output usage information  
 
 ### How it works
 
