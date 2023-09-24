@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const genIndent = (spaceCount = 4, level = 1, offset = 0) => (' ').repeat(spaceCount * level - offset);
+const genIndent = (spaceCount, level, offset = 0) => (' ').repeat(spaceCount * level - offset);
 
 const stringify = (object, level = 0) => {
   const iter = (element, depth = 1, spaceCount = 4) => {
