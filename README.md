@@ -40,4 +40,4 @@ Options:
 
 ### How it works
 
-[![asciicast](https://asciinema.org/a/Vmnttki48TJr8uMVcYy2AszUt.svg)](https://asciinema.org/a/Vmnttki48TJr8uMVcYy2AszUt)
+[![asciicast](https://asciinema.org/a/SYKClUcxJnYEOuiukbW1df3l7.svg)](https://asciinema.org/a/SYKClUcxJnYEOuiukbW1df3l7)
