@@ -15,26 +15,17 @@ const pathJson2 = getFixturePath('file2.json');
 const pathYaml1 = getFixturePath('file1.yaml');
 const pathYaml2 = getFixturePath('file2.yaml');
 
-describe('stylish format', () => {
-  test('stylish format output', () => {
-    const expectedValue = readFile('correctStylish.txt');
-    expect(genDiff(pathJson1, pathJson2)).toEqual(expectedValue);
-    expect(genDiff(pathYaml1, pathYaml2, 'stylish')).toEqual(expectedValue);
-  });
-});
+const stylishResult = readFile('correctStylish.txt');
+const plainResult = readFile('correctPlain.txt');
+const jsonResult = readFile('correctJsonFormat.txt');
 
-describe('plain format', () => {
-  test('plain format output', () => {
-    const expectedValue = readFile('correctPlain.txt');
-    expect(genDiff(pathJson1, pathJson2, 'plain')).toEqual(expectedValue);
-    expect(genDiff(pathYaml1, pathYaml2, 'plain')).toEqual(expectedValue);
-  });
-});
-
-describe('JSON format', () => {
-  test('JSON format output', () => {
-    const expectedValue = readFile('correctJsonFormat.txt');
-    expect(genDiff(pathJson1, pathJson2, 'json')).toEqual(expectedValue);
-    expect(genDiff(pathYaml1, pathYaml2, 'json')).toEqual(expectedValue);
-  });
+test.each([
+  ['stylish', pathJson1, pathJson2, stylishResult],
+  ['stylish', pathYaml1, pathYaml2, stylishResult],
+  ['plain', pathJson1, pathJson2, plainResult],
+  ['plain', pathYaml1, pathYaml2, plainResult],
+  ['json', pathJson1, pathJson2, jsonResult],
+  ['json', pathYaml1, pathYaml2, jsonResult],
+])('gendiff %s', (format, path1, path2, expected) => {
+  expect(genDiff(path1, path2, format)).toEqual(expected);
 });
