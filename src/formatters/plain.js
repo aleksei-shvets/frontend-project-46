@@ -19,7 +19,7 @@ export default (tree) => {
           return `Property '${getFullPath(currentPath, object.key)}' was removed\n`;
         case 'nested':
           return `${iter(object.children, getFullPath(currentPath, object.key))}\n`;
-        case 'notchanged':
+        case 'unchanged':
           return null;
         default:
           throw new Error(`Unknown node in tree ${tree}`);

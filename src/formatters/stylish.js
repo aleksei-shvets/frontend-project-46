@@ -23,7 +23,7 @@ export default (tree) => {
   const iter = (treeArray, level = 1, spaceCount = 4) => {
     const result = treeArray.map((object) => {
       switch (object.type) {
-        case 'notchanged':
+        case 'unchanged':
           return `${genIndent(spaceCount, level)}${object.key}: ${stringify(object.value, level)}`;
         case 'changed':
           return `${genIndent(spaceCount, level, 2)}- ${object.key}: ${stringify(object.value1, level)}\n${genIndent(spaceCount, level, 2)}+ ${object.key}: ${stringify(object.value2, level)}`;
